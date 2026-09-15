@@ -1,14 +1,17 @@
 package com.coworking.cowork.model;
 
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name ="Espacios")
 public class Espacio {
     public void setId(Long id) {
         this.id = id;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
@@ -58,12 +61,24 @@ public class Espacio {
         return nombreSede;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private int capacidad;
+    @Column(nullable = false)
     private double precioHora;
+
+    @Column
     private String description;
+
+    @Column(name = "nombre_categoria", nullable = false)
+
     private String nombreCategoria;
+
+    @Column(nullable = false)
     private String nombreSede;
 
     public Espacio() {

@@ -16,13 +16,23 @@ public class EspacioService {
         this.espacioRepository = espacioRepository;
     }
     public Espacio crearEspacio(Espacio espacio){
-       return espacioRepository.addEspacio(espacio);
+
+        return espacioRepository.save(espacio);
     }
     public boolean borrarEspacio(Long id){
-       return espacioRepository.deleteEspacio(id);
+       if(espacioRepository.existsById(id)){
+           espacioRepository.deleteById(id);
+           return true;
+       }
+       return  false;
     }
     public Espacio actualizarEspacio(Espacio espacio, Long id){
-        return espacioRepository.updateEspacio(espacio, id);
+        if(!espacioRepository.existsById(id)){
+            espacio.setId(id);
+        return null;
+
+        }
+           return espacioRepository.save(espacio);
     }
     public List<Espacio> listarEspacios(){
         return espacioRepository.findAll();
